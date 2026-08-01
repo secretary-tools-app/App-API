@@ -150,7 +150,11 @@ var allowedOrigins = settings.AllowedOrigins?.Length > 0
     : new[] { "http://localhost:4200", "https://localhost:4200", "http://127.0.0.1:4200" };
 builder.Services.AddCors(o => o.AddPolicy("frontend", p =>
     p.WithOrigins(allowedOrigins).AllowAnyHeader().AllowAnyMethod()));
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+    });
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
