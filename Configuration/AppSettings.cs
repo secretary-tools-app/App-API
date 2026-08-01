@@ -26,7 +26,7 @@ public class JwtSettings
 
 public class RateLimitSettings
 {
-    public int LoginAttemptsPerMinute { get; set; } = 5;
-    public int RegisterAttemptsPerMinute { get; set; } = 10;
-    public int DefaultPerHour { get; set; } = 50;
+    public int LoginAttemptsPerMinute { get; set; } = 30;
+    public int RegisterAttemptsPerMinute { get; set; } = 20;
+    public int DefaultPerHour { get; set; } = 1000;
 }
