@@ -188,6 +188,7 @@ Se o volume estiver montado neste caminho, o arquivo do banco continua existindo
 - Não use `sqlite` em memória.
 - Não deixe o banco em `/tmp` nem em uma pasta do container sem volume.
 - O app já está preparado para ler `PORT` do Railway e escutar essa porta dinamicamente.
+- A montagem do volume deve ser feita no painel do Railway, não pelo `VOLUME` do Dockerfile.
 
 ---
 
