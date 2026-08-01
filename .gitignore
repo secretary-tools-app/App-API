@@ -1,0 +1,46 @@
+# ── Segredos e credenciais (NUNCA versionar) ──────────────────
+# appsettings.json (template sem segredo) é mantido no git.
+# Os demais appsettings.*.json podem conter Jwt__Secret, senhas, etc.
+appsettings.*.json
+!appsettings.json
+appsettings.Development.json
+appsettings.Production.json
+appsettings.local.json
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+
+# ── Banco de dados (contém hashes de senha e dados pessoais) ──
+database/*.db
+database/*.db-shm
+database/*.db-wal
+database/*.db-journal
+*.sqlite
+*.sqlite3
+*.db-bak
+
+# ── Credenciais iniciais geradas na primeira execução ──
+secrets/
+credentials*.txt
+*.credentials.txt
+
+# ── Build ─────────────────────────────────────────────────────
+bin/
+obj/
+*.user
+*.suo
+
+# ── Dados gerados (scraper de hinos) ─────────────────────────
+public/hinos/hinosParaOLar.json
+public/hinos/_meta.json
+
+# ── IDE / SO ─────────────────────────────────────────────────
+.vs/
+.idea/
+.vscode/
+*.swp
+Thumbs.db
