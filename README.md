@@ -176,6 +176,7 @@ Para que o banco não desapareça em cada deploy, o app deve usar um diretório 
 - Mount path: `/app/data`
 
 Esse path é o destino do SQLite (`Data Source=/app/data/atas.db`).
+Crie o volume no painel do Railway; não use a diretiva `VOLUME` dentro do Dockerfile, porque o Railway não aceita isso no build.
 Se o volume estiver montado neste caminho, o arquivo do banco continua existindo entre updates e reinícios sem sobrescrever o schema do container.
 
 ### 3) Configure as variáveis de ambiente
@@ -222,5 +223,6 @@ Se o volume estiver montado neste caminho, o arquivo do banco continua existindo
 4. **Campo `hinos`**: armazena `[abertura, encerramento]`. Os campos
    `hino_sacramental` e `hino_intermediario` são colunas separadas.
    A API expande tudo em campos nomeados no response.
-#   A p p - A P I  
+#   A p p - A P I 
+ 
  
