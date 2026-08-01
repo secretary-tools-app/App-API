@@ -4,7 +4,7 @@ WORKDIR /src
 COPY ["AtasApi.csproj", "./"]
 RUN dotnet restore "AtasApi.csproj"
 COPY . .
-RUN dotnet publish -c Release -o /app/publish
+RUN dotnet publish "AtasApi.csproj" -c Release -o /app/publish
 
 # Estágio de Execução
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
