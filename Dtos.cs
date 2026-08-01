@@ -2,6 +2,7 @@
 // DTOs/Requests.cs  +  DTOs/Responses.cs (arquivo único)
 // ============================================================
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace AtasApi.DTOs;
 
@@ -9,8 +10,8 @@ namespace AtasApi.DTOs;
 // AUTH
 // ──────────────────────────────────────────
 public record LoginRequest(
-    [Required] string Username,
-    [Required] string Password
+    [property: Required, JsonPropertyName("username")] string Username,
+    [property: Required, JsonPropertyName("password")] string Password
 );
 
 public record LoginResponse(
