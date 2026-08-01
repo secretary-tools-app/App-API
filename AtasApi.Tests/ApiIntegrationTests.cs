@@ -76,6 +76,19 @@ public class ApiIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
     }
 
+    [Fact]
+    public async Task Login_ComJsonCamelCase_DeveRetornar401EmVezDe400()
+    {
+        // Arrange: o frontend envia camelCase (username/password)
+        var req = new { username = "usuario_nao_existente", password = "SenhaInvalida@123" };
+
+        // Act
+        var response = await _client.PostAsJsonAsync("/api/auth/login", req);
+
+        // Assert
+        Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+    }
+
     // ── TESTES DE ATAS (Requerem Token) ────────────────────────────────
 
     [Fact]
