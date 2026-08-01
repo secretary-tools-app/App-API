@@ -35,6 +35,11 @@ public record ChangePasswordRequest(
     [Required, MinLength(8), MaxLength(128)] string NewPassword
 );
 
+public record AdminResetPasswordRequest(
+    [Required, StringLength(50, MinimumLength = 3)] string Username,
+    [Required, MinLength(8), MaxLength(128)] string NewPassword
+);
+
 public record UsuarioResponse(
     int Id,
     string Username,

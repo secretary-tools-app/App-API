@@ -56,6 +56,8 @@ public interface IAuthService
     Task<LoginResponse?> RegisterAsync(string username, string password, string inviteKey);
     /// <summary>Troca a senha do usuário logado (valida a senha atual).</summary>
     Task<bool> ChangePasswordAsync(int userId, string currentPassword, string newPassword);
+    /// <summary>Redefine a senha de qualquer usuário (uso administrativo).</summary>
+    Task<bool?> AdminResetPasswordAsync(string username, string newPassword);
 }
 
 public class AuthService(IUserRepository userRepo, IAlaKeyRepository alaKeyRepo, IJwtService jwt) : IAuthService
@@ -108,6 +110,18 @@ public class AuthService(IUserRepository userRepo, IAlaKeyRepository alaKeyRepo,
         if (currentPassword == newPassword) return false;
 
         return await userRepo.UpdatePasswordAsync(userId, BCrypt.Net.BCrypt.HashPassword(newPassword));
+    }
+
+    public async Task<bool?> AdminResetPasswordAsync(string username, string newPassword)
+    {
+        var cleanUsername = username.Trim();
+        if (string.IsNullOrWhiteSpace(cleanUsername)) return null;
+
+        var user = await userRepo.GetByUsernameAsync(cleanUsername);
+        if (user is null) return null;
+
+        var updated = await userRepo.UpdatePasswordAsync(user.Id, BCrypt.Net.BCrypt.HashPassword(newPassword));
+        return updated;
     }
 }
 

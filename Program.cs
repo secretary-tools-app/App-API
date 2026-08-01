@@ -143,6 +143,7 @@ builder.Services.AddRateLimiter(rateLimiter =>
 
     rateLimiter.AddFixedWindowLimiter("login", options => { options.Window = TimeSpan.FromMinutes(1); options.PermitLimit = settings.RateLimit.LoginAttemptsPerMinute; });
     rateLimiter.AddFixedWindowLimiter("register", options => { options.Window = TimeSpan.FromMinutes(1); options.PermitLimit = settings.RateLimit.RegisterAttemptsPerMinute; });
+    rateLimiter.AddFixedWindowLimiter("admin", options => { options.Window = TimeSpan.FromMinutes(1); options.PermitLimit = 10; });
 });
 
 var allowedOrigins = settings.AllowedOrigins?.Length > 0

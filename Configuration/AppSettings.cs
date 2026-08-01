@@ -3,11 +3,18 @@
 public class AppSettings
 {
     public JwtSettings Jwt { get; set; } = new();
+    public AdminSettings Admin { get; set; } = new();
     public string ConnectionString { get; set; } = "Data Source=database/atas.db";
     public string SchemaPath { get; set; } = "database/schema_inicial.sql";
     public RateLimitSettings RateLimit { get; set; } = new();
     public string[] AllowedOrigins { get; set; } = [];
     public string[] AllowedHosts { get; set; } = ["localhost", "127.0.0.1", "*.up.railway.app"];
+}
+
+public class AdminSettings
+{
+    /// <summary>Segredo para endpoints administrativos (header X-Admin-Secret). Defina via Admin__Secret.</summary>
+    public string Secret { get; set; } = string.Empty;
 }
 
 public class JwtSettings
