@@ -5,6 +5,8 @@ using AtasApi.Middleware;
 using AtasApi.Repositories;
 using AtasApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.HostFiltering;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.IdentityModel.Tokens;
@@ -27,6 +29,24 @@ if (!string.IsNullOrWhiteSpace(port))
 
 // â”€â”€ ConfiguraÃ§Ãµes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 var settings = builder.Configuration.Get<AppSettings>()!;
+
+builder.Services.Configure<HostFilteringOptions>(options =>
+{
+    var allowedHosts = settings.AllowedHosts?.Length > 0
+        ? settings.AllowedHosts
+        : ["*"];
+
+    options.AllowedHosts = allowedHosts;
+});
+
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor
+        | ForwardedHeaders.XForwardedProto
+        | ForwardedHeaders.XForwardedHost;
+    options.KnownNetworks.Clear();
+    options.KnownProxies.Clear();
+});
 
 // â”€â”€ SeguranÃ§a do JWT: segredo obrigatÃ³rio e forte â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // O segredo NUNCA deve ficar no appsettings.json versionado. Defina
@@ -189,6 +209,12 @@ catch (Exception ex)
     Console.WriteLine("##########################################");
     throw;
 }
+
+app.UseForwardedHeaders();
+app.UseHostFiltering();
+
+app.UseForwardedHeaders();
+app.UseHostFiltering();
 
 if (app.Environment.IsDevelopment())
 {

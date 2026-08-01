@@ -7,6 +7,7 @@ public class AppSettings
     public string SchemaPath { get; set; } = "database/schema_inicial.sql";
     public RateLimitSettings RateLimit { get; set; } = new();
     public string[] AllowedOrigins { get; set; } = [];
+    public string[] AllowedHosts { get; set; } = ["localhost", "127.0.0.1", "*.up.railway.app"];
 }
 
 public class JwtSettings
