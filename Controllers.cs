@@ -380,6 +380,7 @@ public class DiscursantesController(
                 Obs1 = s.Obs1, Obs2 = s.Obs2, Obs3 = s.ObsUltimo,
                 HinoAbertura = s.HinoAbertura, HinoSacramental = s.HinoSacramental,
                 HinoIntermediario = s.HinoIntermediario, HinoEncerramento = s.HinoEncerramento,
+                OracaoAbertura = s.OracaoAbertura, OracaoEncerramento = s.OracaoEncerramento,
                 Date = date
             });
         }
@@ -398,7 +399,8 @@ public class DiscursantesController(
                 Tema1 = s.Tema1, Tema2 = s.Tema2, Tema3 = s.TemaUltimo,
                 Obs1 = s.Obs1, Obs2 = s.Obs2, Obs3 = s.ObsUltimo,
                 HinoAbertura = s.HinoAbertura, HinoSacramental = s.HinoSacramental,
-                HinoIntermediario = s.HinoIntermediario, HinoEncerramento = s.HinoEncerramento
+                HinoIntermediario = s.HinoIntermediario, HinoEncerramento = s.HinoEncerramento,
+                OracaoAbertura = s.OracaoAbertura, OracaoEncerramento = s.OracaoEncerramento
             });
         }
 

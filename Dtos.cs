@@ -219,6 +219,8 @@ public record SaveDiscursantesRequest
     public string? HinoSacramental { get; init; }
     public string? HinoIntermediario { get; init; }
     public string? HinoEncerramento { get; init; }
+    public string? OracaoAbertura { get; init; }
+    public string? OracaoEncerramento { get; init; }
 }
 
 public record DiscursantesStateResponse
@@ -239,6 +241,8 @@ public record DiscursantesStateResponse
     public string? HinoSacramental { get; init; }
     public string? HinoIntermediario { get; init; }
     public string? HinoEncerramento { get; init; }
+    public string? OracaoAbertura { get; init; }
+    public string? OracaoEncerramento { get; init; }
 }
 
 public record DiscursanteSugestao

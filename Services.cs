@@ -280,7 +280,9 @@ public class SacramentalService(ISacramentalRepository sacRepo) : ISacramentalSe
             HinoAbertura = s.Hinos != null ? JsonFieldHelper.DeserializeList(s.Hinos).ElementAtOrDefault(0) : null,
             HinoEncerramento = s.Hinos != null ? JsonFieldHelper.DeserializeList(s.Hinos).ElementAtOrDefault(1) : null,
             HinoSacramental = s.HinoSacramental,
-            HinoIntermediario = s.HinoIntermediario
+            HinoIntermediario = s.HinoIntermediario,
+            OracaoAbertura = s.Oracoes != null ? JsonFieldHelper.DeserializeList(s.Oracoes).ElementAtOrDefault(0) : null,
+            OracaoEncerramento = s.Oracoes != null ? JsonFieldHelper.DeserializeList(s.Oracoes).ElementAtOrDefault(1) : null,
         });
     }
 
@@ -308,6 +310,7 @@ public class SacramentalService(ISacramentalRepository sacRepo) : ISacramentalSe
         // Busca ou cria o sacramental
         var existing = await sacRepo.GetByAtaIdAsync(ataId);
         var hinosJson = JsonFieldHelper.SerializeHinos(req.HinoAbertura, req.HinoEncerramento);
+        var oracoesJson = JsonFieldHelper.SerializeOracoes(req.OracaoAbertura, req.OracaoEncerramento);
 
         if (existing is null)
         {
@@ -323,7 +326,8 @@ public class SacramentalService(ISacramentalRepository sacRepo) : ISacramentalSe
                 Obs1 = req.Obs1, Obs2 = req.Obs2, ObsUltimo = req.Obs3,
                 Hinos = hinosJson,
                 HinoSacramental = req.HinoSacramental,
-                HinoIntermediario = req.HinoIntermediario
+                HinoIntermediario = req.HinoIntermediario,
+                Oracoes = oracoesJson
             });
         }
         else
@@ -338,6 +342,7 @@ public class SacramentalService(ISacramentalRepository sacRepo) : ISacramentalSe
             existing.Hinos = hinosJson;
             existing.HinoSacramental = req.HinoSacramental;
             existing.HinoIntermediario = req.HinoIntermediario;
+            existing.Oracoes = oracoesJson;
             await sacRepo.UpdateAsync(existing);
         }
 
@@ -351,7 +356,8 @@ public class SacramentalService(ISacramentalRepository sacRepo) : ISacramentalSe
             Tema = req.Tema, Tema1 = req.Tema1, Tema2 = req.Tema2, Tema3 = req.Tema3,
             Obs1 = req.Obs1, Obs2 = req.Obs2, Obs3 = req.Obs3,
             HinoAbertura = req.HinoAbertura, HinoSacramental = req.HinoSacramental,
-            HinoIntermediario = req.HinoIntermediario, HinoEncerramento = req.HinoEncerramento
+            HinoIntermediario = req.HinoIntermediario, HinoEncerramento = req.HinoEncerramento,
+            OracaoAbertura = req.OracaoAbertura, OracaoEncerramento = req.OracaoEncerramento
         };
     }
 
